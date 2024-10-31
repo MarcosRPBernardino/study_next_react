@@ -3,37 +3,45 @@ import { useState } from "react";
 
 
 export default function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [state, setState] = useState({
+        email: "",
+        password: "",
+    });
+
 
     function handleChange(e) {
-        setEmail(e.target.value)
-        console.log(e.target.value);
+        console.log(e.target.value)
+        const { value, id } = e.target
+        console.log({
+            ...state, [id]: value
+        });
         
-    }
-
-    function handleeChange(e) {
-        setPassword(e.target.value)
-        console.log(e.target.value);
-        
+        setState({
+            ...state,
+            [id]: value
+        })
     }
 
     return (
         <div>
             <div>login</div>
-            <p>{email}</p>
-            <p>{password}</p>
+            <p>{state.email}</p>
+            <p>{state.password}</p>
             <form>
-                <input 
-                    type="email" 
-                    placeholder="E-mail" 
-                    value={email} 
-                    onChange={ (e) => handleChange(e) }
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="E-mail"
+                    value={state.email}
+                    onChange={(e) => handleChange(e)}
                 />
-                <input type="password" 
-                placeholder="Password" 
-                value={password} 
-                onChange={ (e) => handleeChange (e)}/>
+                <input 
+                    type="password"
+                    id="password"
+                    placeholder="Password"
+                    value={state.password}
+                    onChange={(e) => handleChange(e)} 
+                />
             </form>
         </div>
     );
